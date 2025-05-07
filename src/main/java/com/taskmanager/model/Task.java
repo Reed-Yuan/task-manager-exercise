@@ -6,12 +6,13 @@ public class Task {
     private Long id;
     private String title;
     private String description;
-    private Priority priority;
     private boolean completed;
+    private Priority priority;
     private LocalDateTime createdAt;
 
     public Task() {
         this.createdAt = LocalDateTime.now();
+        this.completed = false;
     }
 
     public Task(String title, String description, Priority priority) {
@@ -19,7 +20,6 @@ public class Task {
         this.title = title;
         this.description = description;
         this.priority = priority;
-        this.completed = false;
     }
 
     // Getters and Setters
@@ -47,14 +47,6 @@ public class Task {
         this.description = description;
     }
 
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
-
     public boolean isCompleted() {
         return completed;
     }
@@ -63,15 +55,19 @@ public class Task {
         this.completed = completed;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public enum Priority {
-        LOW, MEDIUM, HIGH
     }
 } 

@@ -1,3 +1,16 @@
+/* Modern Variables */
+:root {
+    --primary-color: #6C63FF;
+    --secondary-color: #4CAF50;
+    --danger-color: #FF5252;
+    --warning-color: #FFC107;
+    --text-color: #2C3E50;
+    --bg-color: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
 /* General Styles */
 * {
     margin: 0;
@@ -6,153 +19,258 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 2rem;
 }
 
 h1 {
     text-align: center;
-    color: #2c3e50;
-    margin-bottom: 30px;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    color: #2c3e50;
-    margin-bottom: 20px;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
 }
 
 /* Buttons */
 .btn {
     display: inline-block;
-    padding: 8px 16px;
-    background-color: #3498db;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
     color: white;
     text-decoration: none;
     border: none;
-    border-radius: 4px;
+    border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: var(--transition);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    box-shadow: var(--shadow);
 }
 
 .btn:hover {
-    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #5a52d5;
 }
 
 .btn.active {
-    background-color: #2c3e50;
+    background-color: var(--text-color);
 }
 
 .btn-danger {
-    background-color: #e74c3c;
+    background-color: var(--danger-color);
 }
 
 .btn-danger:hover {
-    background-color: #c0392b;
+    background-color: #ff3333;
 }
 
 .btn-small {
-    padding: 4px 8px;
-    font-size: 0.9em;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
 }
 
 /* Forms */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
 }
 
 input[type="text"],
 textarea,
 select {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1em;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: var(--card-bg);
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
 }
 
 textarea {
-    height: 100px;
+    height: 120px;
     resize: vertical;
 }
 
 /* Task List */
 .task-list {
-    margin-top: 30px;
+    margin-top: 2rem;
 }
 
 .task-item {
-    background-color: white;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: var(--transition);
+    border: 1px solid #e0e0e0;
+}
+
+.task-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .task-item.completed {
     opacity: 0.7;
+    background-color: #f8f9fa;
 }
 
 .task-item.completed h3 {
     text-decoration: line-through;
+    color: #6c757d;
 }
 
 .task-content {
     flex: 1;
 }
 
+.task-content h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
 .task-meta {
-    margin-top: 10px;
-    font-size: 0.9em;
+    margin-top: 1rem;
+    font-size: 0.9rem;
     color: #666;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .priority {
-    padding: 2px 6px;
-    border-radius: 3px;
-    margin-right: 10px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .priority.low {
-    background-color: #2ecc71;
+    background-color: var(--secondary-color);
     color: white;
 }
 
 .priority.medium {
-    background-color: #f1c40f;
-    color: white;
+    background-color: var(--warning-color);
+    color: #000;
 }
 
 .priority.high {
-    background-color: #e74c3c;
+    background-color: var(--danger-color);
     color: white;
 }
 
 /* Filters */
 .filters {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .filters .btn {
-    margin: 0 5px;
+    min-width: 100px;
 }
 
 /* Add Task Section */
 .add-task {
-    background-color: white;
-    padding: 20px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    border: 1px solid #e0e0e0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .task-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .task-actions {
+        width: 100%;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filters .btn {
+        width: 100%;
+        max-width: 200px;
+    }
 } 

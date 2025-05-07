@@ -2,10 +2,10 @@ package com.taskmanager.controller;
 
 import com.taskmanager.model.Task;
 import com.taskmanager.service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
 @RequestMapping("/tasks")
@@ -19,31 +19,26 @@ public class TaskController {
     }
 
     @GetMapping
-    public String listTasks(@RequestParam(required = false) String filter, Model model) {
-        if ("active".equals(filter)) {
-            model.addAttribute("tasks", taskService.getTasksByStatus(false));
-        } else if ("completed".equals(filter)) {
-            model.addAttribute("tasks", taskService.getTasksByStatus(true));
-        } else {
-            model.addAttribute("tasks", taskService.getAllTasks());
-        }
-        model.addAttribute("newTask", new Task());
+    public String getAllTasks(Model model) {
+        model.addAttribute("tasks", taskService.getAllTasks());
         return "tasks";
     }
 
+    @GetMapping("/add")
+    public String showAddTaskForm(Model model) {
+        model.addAttribute("task", new Task());
+        return "add-task";
+    }
+
     @PostMapping
-    public String createTask(@ModelAttribute Task task) {
-        taskService.createTask(task);
+    public String addTask(@ModelAttribute Task task) {
+        taskService.addTask(task);
         return "redirect:/tasks";
     }
 
-    @PostMapping("/{id}/toggle")
-    public String toggleTaskStatus(@PathVariable Long id) {
-        Task task = taskService.getTaskById(id);
-        if (task != null) {
-            task.setCompleted(!task.isCompleted());
-            taskService.updateTask(task);
-        }
+    @PostMapping("/{id}/complete")
+    public String markTaskAsCompleted(@PathVariable Long id) {
+        taskService.markTaskAsCompleted(id);
         return "redirect:/tasks";
     }
 
@@ -51,5 +46,11 @@ public class TaskController {
     public String deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
         return "redirect:/tasks";
+    }
+
+    @GetMapping("/filter")
+    public String filterTasks(@RequestParam boolean completed, Model model) {
+        model.addAttribute("tasks", taskService.getTasksByStatus(completed));
+        return "tasks";
     }
 } 
