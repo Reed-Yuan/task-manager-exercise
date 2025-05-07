@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/tasks")
 public class TaskController {
@@ -39,6 +41,17 @@ public class TaskController {
     @PostMapping("/{id}/complete")
     public String markTaskAsCompleted(@PathVariable Long id) {
         taskService.markTaskAsCompleted(id);
+        return "redirect:/tasks";
+    }
+
+    @PostMapping("/{id}/toggle")
+    public String toggleTaskCompletion(@PathVariable Long id) {
+        Optional<Task> taskOpt = taskService.getTaskById(id);
+        if (taskOpt.isPresent()) {
+            Task task = taskOpt.get();
+            task.setCompleted(!task.isCompleted());
+            taskService.updateTask(task);
+        }
         return "redirect:/tasks";
     }
 

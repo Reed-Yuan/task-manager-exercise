@@ -19,6 +19,4 @@
     </bean>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
-
-    <bean id="taskService" class="com.taskmanager.service.TaskServiceImpl"/>
 </beans> 

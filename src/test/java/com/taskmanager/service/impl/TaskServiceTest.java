@@ -1,11 +1,14 @@
-package com.taskmanager.service;
+package com.taskmanager.service.impl;
 
 import com.taskmanager.model.Task;
+import com.taskmanager.service.TaskService;
 import com.taskmanager.model.Priority;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import com.taskmanager.config.DatabaseConfig;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +17,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-@ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(classes = {DatabaseConfig.class, TaskServiceImpl.class})
 public class TaskServiceTest {
 
+    @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @BeforeEach
     void setUp() {
-        taskService = new TaskServiceImpl();
+        // Clear the tasks table before each test
+        jdbcTemplate.execute("DELETE FROM tasks");
     }
 
     @Test

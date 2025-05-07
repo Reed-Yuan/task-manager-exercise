@@ -13,9 +13,9 @@
         
         <!-- Filter buttons -->
         <div class="filters">
-            <a href="${pageContext.request.contextPath}/tasks" class="btn ${empty param.filter ? 'active' : ''}">All</a>
-            <a href="${pageContext.request.contextPath}/tasks?filter=active" class="btn ${param.filter == 'active' ? 'active' : ''}">Active</a>
-            <a href="${pageContext.request.contextPath}/tasks?filter=completed" class="btn ${param.filter == 'completed' ? 'active' : ''}">Completed</a>
+            <a href="${pageContext.request.contextPath}/tasks" class="btn ${empty param.completed ? 'active' : ''}">All</a>
+            <a href="${pageContext.request.contextPath}/tasks/filter?completed=false" class="btn ${param.completed == 'false' ? 'active' : ''}">Active</a>
+            <a href="${pageContext.request.contextPath}/tasks/filter?completed=true" class="btn ${param.completed == 'true' ? 'active' : ''}">Completed</a>
         </div>
 
         <!-- Add new task form -->
