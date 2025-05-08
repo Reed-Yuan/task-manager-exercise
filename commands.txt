@@ -1,0 +1,5 @@
+/opt/homebrew/opt/tomcat@9/bin/catalina jpda start
+
+/opt/homebrew/opt/tomcat@9/bin/catalina stop
+
+export MAVEN_OPTS="-Xms256m -Xmx512m"

@@ -32,7 +32,7 @@ A Spring MVC-based task management application that allows users to create, view
    ```
 3. Run the application using Maven:
    ```bash
-   mvn tomcat7:run
+   mvn cargo:run
    ```
 4. Access the application at: `http://localhost:8080/task-manager/tasks`
 
