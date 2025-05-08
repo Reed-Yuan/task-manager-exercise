@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -26,17 +27,12 @@ public class TaskController {
     @GetMapping
     public String getAllTasks(Model model) {
         logger.debug("Getting all tasks");
-        model.addAttribute("tasks", taskService.getAllTasks());
-        logger.debug("Retrieved {} tasks", taskService.getAllTasks().size());
+        List<Task> tasks = taskService.getAllTasks();
+        model.addAttribute("tasks", tasks);
+        logger.debug("Retrieved {} tasks", tasks.size());
         return "tasks";
     }
 
-    @GetMapping("/add")
-    public String showAddTaskForm(Model model) {
-        logger.debug("Showing add task form");
-        model.addAttribute("task", new Task());
-        return "add-task";
-    }
 
     @PostMapping
     public String addTask(@ModelAttribute Task task) {
@@ -82,9 +78,9 @@ public class TaskController {
     @GetMapping("/filter")
     public String filterTasks(@RequestParam boolean completed, Model model) {
         logger.debug("Filtering tasks by completion status: {}", completed);
-        model.addAttribute("tasks", taskService.getTasksByStatus(completed));
-        logger.debug("Retrieved {} tasks with completion status: {}", 
-            taskService.getTasksByStatus(completed).size(), completed);
+        List<Task> tasks = taskService.getTasksByStatus(completed);
+        model.addAttribute("tasks", tasks);
+        logger.debug("Retrieved {} tasks with completion status: {}", tasks.size(), completed);
         return "tasks";
     }
 } 

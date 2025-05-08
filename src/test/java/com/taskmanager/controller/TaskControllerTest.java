@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -65,13 +64,6 @@ public class TaskControllerTest {
         verify(taskService).getAllTasks();
     }
 
-    @Test
-    void whenShowAddTaskForm_thenReturnAddTaskForm() throws Exception {
-        mockMvc.perform(get("/tasks/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("add-task"))
-                .andExpect(model().attributeExists("task"));
-    }
 
     @Test
     void whenAddTask_thenRedirectToTaskList() throws Exception {
