@@ -1,6 +1,8 @@
 package com.taskmanager.model;
 
+import java.util.Date;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class Task {
     private Long id;
@@ -67,7 +69,11 @@ public class Task {
         return createdAt;
     }
 
+    public Date getCreatedAtLocal() {
+        return Date.from(createdAt.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-} 
+}

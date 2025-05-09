@@ -33,15 +33,6 @@ public class TaskController {
         return "tasks";
     }
 
-
-    @PostMapping
-    public String addTask(@ModelAttribute Task task) {
-        logger.info("Adding new task: {}", task.getTitle());
-        taskService.addTask(task);
-        logger.info("Task added successfully with ID: {}", task.getId());
-        return "redirect:/tasks";
-    }
-
     @PostMapping("/{id}/complete")
     public String markTaskAsCompleted(@PathVariable Long id) {
         logger.info("Marking task as completed, task ID: {}", id);
@@ -75,6 +66,21 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+    @GetMapping("/addTask")
+    public String showAddTaskForm(Model model) {
+        logger.debug("Displaying add task form");
+        model.addAttribute("task", new Task()); // Add an empty Task object to the model
+        return "/addTask"; // Return the view name for the add task form
+    }
+
+    @PostMapping("/add")
+    public String addTask(@ModelAttribute Task task) {
+        logger.info("Adding new task: {}", task.getTitle());
+        taskService.addTask(task);
+        logger.info("Task added successfully with ID: {}", task.getId());
+        return "redirect:/tasks";
+    }
+
     @GetMapping("/filter")
     public String filterTasks(@RequestParam boolean completed, Model model) {
         logger.debug("Filtering tasks by completion status: {}", completed);
@@ -83,4 +89,4 @@ public class TaskController {
         logger.debug("Retrieved {} tasks with completion status: {}", tasks.size(), completed);
         return "tasks";
     }
-} 
+}

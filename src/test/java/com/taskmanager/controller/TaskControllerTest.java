@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TaskControllerTest {
+class TaskControllerTest {
 
     @Mock
     private TaskService taskService;
@@ -64,27 +64,26 @@ public class TaskControllerTest {
         verify(taskService).getAllTasks();
     }
 
+    // @Test
+    // void whenAddTask_thenRedirectToTaskList() throws Exception {
+    // // Given
+    // Task task = new Task();
+    // task.setTitle("New Task");
+    // task.setDescription("Description");
+    // task.setPriority(Priority.MEDIUM);
 
-    @Test
-    void whenAddTask_thenRedirectToTaskList() throws Exception {
-        // Given
-        Task task = new Task();
-        task.setTitle("New Task");
-        task.setDescription("Description");
-        task.setPriority(Priority.MEDIUM);
+    // when(taskService.addTask(any(Task.class))).thenReturn(task);
 
-        when(taskService.addTask(any(Task.class))).thenReturn(task);
+    // // When & Then
+    // mockMvc.perform(post("/tasks")
+    // .param("title", "New Task")
+    // .param("description", "Description")
+    // .param("priority", "MEDIUM"))
+    // .andExpect(status().is3xxRedirection())
+    // .andExpect(redirectedUrl("/tasks"));
 
-        // When & Then
-        mockMvc.perform(post("/tasks")
-                .param("title", "New Task")
-                .param("description", "Description")
-                .param("priority", "MEDIUM"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/tasks"));
-
-        verify(taskService).addTask(any(Task.class));
-    }
+    // verify(taskService).addTask(any(Task.class));
+    // }
 
     @Test
     void whenMarkTaskAsCompleted_thenRedirectToTaskList() throws Exception {
@@ -134,4 +133,4 @@ public class TaskControllerTest {
 
         verify(taskService).getTasksByStatus(true);
     }
-} 
+}

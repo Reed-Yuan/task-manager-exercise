@@ -137,53 +137,51 @@ textarea {
     margin-top: 2rem;
 }
 
-.task-item {
+/* New Table Styles for Tasks */
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
     background-color: var(--card-bg);
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-    border-radius: 15px;
     box-shadow: var(--shadow);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: var(--transition);
-    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden; /* Ensures border-radius clips content */
 }
 
-.task-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+.task-table th,
+.task-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.task-item.completed {
+.task-table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.task-table tbody tr:last-child td {
+    border-bottom: none; /* No border for the last row's cells */
+}
+
+.task-table tbody tr:hover {
+    background-color: #f1f1f1; /* Hover effect for rows */
+}
+
+.task-table tr.completed td {
     opacity: 0.7;
-    background-color: #f8f9fa;
 }
 
-.task-item.completed h3 {
+.task-table tr.completed td[data-label="Title"] {
     text-decoration: line-through;
     color: #6c757d;
 }
 
-.task-content {
-    flex: 1;
-}
-
-.task-content h3 {
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.task-meta {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #666;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
+/* Styles for priority span remain largely the same but ensure display property if needed */
 .priority {
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
@@ -191,6 +189,7 @@ textarea {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
+    display: inline-block; /* Good for alignment within td */
 }
 
 .priority.low {
@@ -208,8 +207,18 @@ textarea {
     color: white;
 }
 
+.task-actions-cell form {
+    display: inline-block; /* Align forms side-by-side */
+    margin-bottom: 0; /* Remove default form margin */
+}
+
+.task-actions-cell form:not(:last-child) {
+    margin-right: 5px; /* Space between action buttons */
+}
+
 /* Filters */
 .filters {
+    margin-top: 4rem;
     margin-bottom: 2rem;
     text-align: center;
     display: flex;
@@ -253,17 +262,6 @@ textarea {
         padding: 1rem;
     }
 
-    .task-item {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .task-actions {
-        width: 100%;
-        display: flex;
-        gap: 0.5rem;
-    }
-
     .filters {
         flex-direction: column;
         align-items: center;
@@ -271,6 +269,80 @@ textarea {
 
     .filters .btn {
         width: 100%;
-        max-width: 200px;
+        max-width: 200px; /* Or adjust as needed */
     }
-} 
+
+    /* Responsive Table Styles */
+    .task-table thead {
+        display: none; /* Hide table headers on small screens */
+    }
+
+    .task-table, .task-table tbody, .task-table tr, .task-table td {
+        display: block; /* Stack table elements */
+        width: 100%;
+    }
+
+    .task-table tr {
+        margin-bottom: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        padding: 0.5rem; /* Padding for the "card" */
+        background-color: var(--card-bg);
+    }
+
+    .task-table tbody tr:last-child {
+        margin-bottom: 0;
+    }
+
+    .task-table td {
+        text-align: right; /* Align cell content to the right */
+        padding-left: 50%;   /* Make space for the data label */
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        position: relative;
+        border-bottom: 1px solid #eee; /* Line between fields in a card */
+    }
+
+    .task-table tr td:last-child { /* Last field in a card has no bottom border */
+        border-bottom: none;
+    }
+
+    .task-table td::before {
+        content: attr(data-label); /* Use data-label for pseudo-header */
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px); /* Adjust as needed */
+        padding-right: 10px;
+        white-space: normal; /* Allow label text to wrap */
+        text-align: left;
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    .task-table td.task-actions-cell {
+        text-align: center; /* Center action buttons */
+        padding-left: 10px; /* Reset padding if label is hidden */
+        padding-right: 10px;
+    }
+
+    .task-table td.task-actions-cell::before {
+        display: none; /* No data-label for actions cell */
+    }
+
+    .task-actions-cell form {
+        display: block; /* Stack forms */
+        margin: 0 auto 0.5rem auto; /* Center forms and add bottom margin */
+        width: fit-content;
+    }
+
+    .task-actions-cell form:last-child {
+        margin-bottom: 0;
+    }
+
+    .task-actions-cell .btn {
+        width: 100%;
+        min-width: 180px; /* Or your preferred min-width */
+        display: block;
+    }
+}
