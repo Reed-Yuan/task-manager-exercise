@@ -6,3 +6,7 @@ sudo cp target/task-manager-1.0-SNAPSHOT.war /opt/homebrew/opt/tomcat@9/libexec/
 /opt/homebrew/opt/tomcat@9/bin/catalina jpda start
 
 /opt/homebrew/opt/tomcat@9/bin/catalina stop
+
+npm run test:ui
+
+npm test
