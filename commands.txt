@@ -10,3 +10,7 @@ sudo cp target/task-manager-1.0-SNAPSHOT.war /opt/homebrew/opt/tomcat@9/libexec/
 npm run test:ui
 
 npm test
+
+/opt/homebrew/Cellar/tomcat@9/9.0.104/libexec/logs
+
+jdbc:h2:mem:testdb
